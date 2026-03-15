@@ -1,0 +1,14 @@
+{
+  "title": "Breaking: rename triage output fields and drop legacy keys",
+  "description": "This removes the old JSON field names from the CLI output. Migration required for downstream automation that still reads the legacy keys.",
+  "changed_file_paths": [
+    "src/oss_maintainer_copilot/cli.py",
+    "src/oss_maintainer_copilot/schemas/triage.py",
+    "README.md"
+  ],
+  "commit_messages": [
+    "breaking: remove legacy triage keys",
+    "docs: add migration note for output rename"
+  ]
+}
+

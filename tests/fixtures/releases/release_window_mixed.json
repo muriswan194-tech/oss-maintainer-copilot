@@ -1,0 +1,39 @@
+{
+  "version_range": {
+    "previous": "v0.2.0",
+    "current": "v0.3.0"
+  },
+  "merged_pull_requests": [
+    {
+      "title": "Add contributor guidance generation for issue triage",
+      "labels": ["feature", "triage"],
+      "author": "alice",
+      "merge_date": "2026-03-10"
+    },
+    {
+      "title": "Fix issue label synchronization in GitHub Action",
+      "labels": ["bug", "automation"],
+      "author": "bob",
+      "merge_date": "2026-03-11"
+    },
+    {
+      "title": "Documentation: improve Windows setup instructions",
+      "labels": ["docs"],
+      "author": "alice",
+      "merge_date": "2026-03-12"
+    },
+    {
+      "title": "Refactor payload parsing helpers into a shared module",
+      "labels": ["refactor"],
+      "author": "carol",
+      "merge_date": "2026-03-13"
+    },
+    {
+      "title": "Breaking: rename triage output fields and require migration",
+      "labels": ["breaking", "feature"],
+      "author": "dave",
+      "merge_date": "2026-03-14"
+    }
+  ]
+}
+

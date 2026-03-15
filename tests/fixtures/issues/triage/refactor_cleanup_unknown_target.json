@@ -1,0 +1,11 @@
+{
+  "title": "Cleanup some technical debt in the triage code",
+  "body": "The triage code feels messy and should be simplified.",
+  "labels": [
+    "technical debt"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot"
+  }
+}
+

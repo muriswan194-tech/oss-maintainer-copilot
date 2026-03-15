@@ -1,0 +1,11 @@
+{
+  "title": "Bug: comments fail sometimes",
+  "body": "This seems broken in production.",
+  "labels": [
+    "bug"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot"
+  }
+}
+

@@ -1,0 +1,148 @@
+name: Release Notes Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      previous_version:
+        description: "Previous version tag"
+        required: true
+        type: string
+      current_version:
+        description: "Current version tag"
+        required: true
+        type: string
+      target_commitish:
+        description: "Branch or commit for release creation if the draft does not exist"
+        required: false
+        default: "main"
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  draft:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .[dev]
+
+      - name: Build release notes input
+        uses: actions/github-script@v7
+        env:
+          PREVIOUS_VERSION: ${{ inputs.previous_version }}
+          CURRENT_VERSION: ${{ inputs.current_version }}
+        with:
+          script: |
+            const fs = require("fs");
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const previousVersion = process.env.PREVIOUS_VERSION;
+            const currentVersion = process.env.CURRENT_VERSION;
+
+            const compare = await github.rest.repos.compareCommitsWithBasehead({
+              owner,
+              repo,
+              basehead: `${previousVersion}...${currentVersion}`
+            });
+
+            const pullRequests = new Map();
+            for (const commit of compare.data.commits) {
+              const associated = await github.rest.repos.listPullRequestsAssociatedWithCommit({
+                owner,
+                repo,
+                commit_sha: commit.sha
+              });
+
+              for (const pr of associated.data) {
+                if (!pr.merged_at) {
+                  continue;
+                }
+                pullRequests.set(pr.number, {
+                  title: pr.title,
+                  labels: (pr.labels || []).map((label) => label.name),
+                  author: pr.user ? pr.user.login : "unknown",
+                  merge_date: pr.merged_at.slice(0, 10)
+                });
+              }
+            }
+
+            const payload = {
+              version_range: {
+                previous: previousVersion,
+                current: currentVersion
+              },
+              merged_pull_requests: Array.from(pullRequests.values()).sort((a, b) => a.merge_date.localeCompare(b.merge_date))
+            };
+
+            fs.writeFileSync("release-input.json", JSON.stringify(payload, null, 2));
+
+      - name: Generate release notes draft
+        run: |
+          python -m oss_maintainer_copilot.cli generate-release-notes \
+            --input release-input.json \
+            --output release-notes.json \
+            --markdown release-notes.md
+
+      - name: Create or update draft release
+        uses: actions/github-script@v7
+        env:
+          CURRENT_VERSION: ${{ inputs.current_version }}
+          TARGET_COMMITISH: ${{ inputs.target_commitish }}
+        with:
+          script: |
+            const fs = require("fs");
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const tag = process.env.CURRENT_VERSION;
+            const targetCommitish = process.env.TARGET_COMMITISH;
+            const releaseBody = fs.readFileSync("release-notes.md", "utf8");
+            const releaseMeta = JSON.parse(fs.readFileSync("release-notes.json", "utf8"));
+
+            let existingRelease = null;
+            try {
+              const response = await github.rest.repos.getReleaseByTag({
+                owner,
+                repo,
+                tag
+              });
+              existingRelease = response.data;
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+            }
+
+            if (existingRelease) {
+              await github.rest.repos.updateRelease({
+                owner,
+                repo,
+                release_id: existingRelease.id,
+                tag_name: tag,
+                name: releaseMeta.release_title,
+                body: releaseBody,
+                draft: true
+              });
+            } else {
+              await github.rest.repos.createRelease({
+                owner,
+                repo,
+                tag_name: tag,
+                target_commitish: targetCommitish,
+                name: releaseMeta.release_title,
+                body: releaseBody,
+                draft: true
+              });
+            }

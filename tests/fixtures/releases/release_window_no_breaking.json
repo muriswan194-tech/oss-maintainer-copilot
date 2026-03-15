@@ -1,0 +1,21 @@
+{
+  "version_range": {
+    "previous": "v0.3.0",
+    "current": "v0.3.1"
+  },
+  "merged_pull_requests": [
+    {
+      "title": "Fix contributor acknowledgment ordering",
+      "labels": ["bug"],
+      "author": "alice",
+      "merge_date": "2026-03-15"
+    },
+    {
+      "title": "Docs: add release drafting example",
+      "labels": ["documentation"],
+      "author": "erin",
+      "merge_date": "2026-03-15"
+    }
+  ]
+}
+

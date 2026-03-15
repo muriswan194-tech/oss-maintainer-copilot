@@ -1,0 +1,11 @@
+{
+  "title": "Documentation typo in contributing guide link",
+  "body": "The CONTRIBUTING guide links to the wrong workflow example.\n\nTarget file: docs/contributing.md.\nExpected behavior: the link should point to the issue triage workflow section.",
+  "labels": [
+    "documentation"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot"
+  }
+}
+

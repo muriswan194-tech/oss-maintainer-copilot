@@ -1,0 +1,12 @@
+{
+  "number": 14,
+  "title": "Clarify README setup steps for Windows contributors",
+  "body": "## Problem\nNew contributors on Windows are getting stuck during local setup.\n\n## Expected behavior\nThe README should show the virtual environment activation command for PowerShell alongside the existing commands.\n\n## Acceptance criteria\n- Add the PowerShell activation command\n- Keep the setup section short\n- Do not change other installation steps",
+  "state": "open",
+  "html_url": "https://github.com/octo-org/oss-maintainer-copilot/issues/14",
+  "labels": [],
+  "user": {
+    "login": "maintainer-example"
+  }
+}
+

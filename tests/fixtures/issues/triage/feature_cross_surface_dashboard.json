@@ -1,0 +1,16 @@
+{
+  "title": "Feature request: add a maintainer dashboard for issue health",
+  "body": "Please add a dashboard that combines API data, CLI execution, workflow telemetry, and database history so maintainers can monitor everything in one place. It should also consider performance and security.",
+  "labels": [
+    "feature"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "primary_language": "Python",
+    "topics": [
+      "github-actions",
+      "automation"
+    ]
+  }
+}
+

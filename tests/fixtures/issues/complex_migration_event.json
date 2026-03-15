@@ -1,0 +1,19 @@
+{
+  "action": "opened",
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "html_url": "https://github.com/octo-org/oss-maintainer-copilot"
+  },
+  "issue": {
+    "number": 87,
+    "title": "Plan a breaking change migration for the release process and API contract",
+    "body": "We need a proposal for a breaking change that updates the release process, CLI contract, documentation, and workflow integration. This should preserve backward compatibility where possible, document deprecation timing, and coordinate with maintainers before implementation.\n\nPlease include architecture notes, migration sequencing, rollout risks, and any governance concerns.",
+    "state": "open",
+    "html_url": "https://github.com/octo-org/oss-maintainer-copilot/issues/87",
+    "labels": [],
+    "user": {
+      "login": "project-owner"
+    }
+  }
+}
+

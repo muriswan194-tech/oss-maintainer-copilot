@@ -1,0 +1,15 @@
+{
+  "title": "Update GitHub issue triage workflow permissions and auth handling",
+  "description": "Refactors the workflow and token handling so issue comments and labels are posted through a narrower auth path.",
+  "changed_file_paths": [
+    ".github/workflows/issue-triage.yml",
+    "src/oss_maintainer_copilot/github/events.py",
+    "src/oss_maintainer_copilot/cli.py",
+    "tests/test_payload_loading.py"
+  ],
+  "commit_messages": [
+    "refactor: tighten workflow permissions",
+    "fix: update auth path for issue triage comments"
+  ]
+}
+

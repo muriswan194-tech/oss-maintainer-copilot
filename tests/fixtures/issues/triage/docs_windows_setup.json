@@ -1,0 +1,12 @@
+{
+  "title": "Docs: clarify README setup steps for PowerShell",
+  "body": "The README setup section should mention the PowerShell activation command.\n\nTarget file: README.\nExpected behavior: a Windows contributor can follow the setup guide without guessing shell syntax.",
+  "labels": [
+    "docs"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "primary_language": "Python"
+  }
+}
+

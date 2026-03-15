@@ -1,0 +1,17 @@
+{
+  "title": "Bug: login redirect loop after session expires",
+  "body": "When a session expires, the app redirects the user between /login and /dashboard until the browser tab is refreshed.\n\nSteps to reproduce:\n1. Sign in.\n2. Wait for the session to expire.\n3. Click any protected page.\n\nExpected behavior:\nThe user should be sent to /login once and shown a fresh sign-in screen.\n\nAcceptance criteria:\n- stop the redirect loop\n- keep the fix limited to the auth flow",
+  "labels": [
+    "bug",
+    "auth"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "primary_language": "Python",
+    "topics": [
+      "automation",
+      "github"
+    ]
+  }
+}
+

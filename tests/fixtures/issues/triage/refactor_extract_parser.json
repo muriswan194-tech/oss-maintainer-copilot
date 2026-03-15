@@ -1,0 +1,11 @@
+{
+  "title": "Refactor: extract issue payload parsing into a dedicated module",
+  "body": "The event parsing code is getting harder to follow.\n\nTarget module: src/oss_maintainer_copilot/github/events.py.\nAcceptance criteria:\n- extract the parsing helpers into a small module\n- keep the public behavior unchanged\n- keep existing tests passing",
+  "labels": [
+    "refactor"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot"
+  }
+}
+

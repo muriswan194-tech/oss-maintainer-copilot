@@ -1,0 +1,10 @@
+{
+  "title": "Question about project structure",
+  "body": "Should we change how the project is organized?",
+  "labels": [
+    "question"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot"
+  }
+}

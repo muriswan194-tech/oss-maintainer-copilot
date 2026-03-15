@@ -1,0 +1,12 @@
+{
+  "title": "Feature request: allow filtering issue triage by label",
+  "body": "Contributors want to run triage on only docs or bug issues because that makes local testing faster.\n\nAcceptance criteria:\n- add a label filter option to the CLI\n- keep the current behavior as the default\n- document the new flag in README",
+  "labels": [
+    "enhancement"
+  ],
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "primary_language": "Python"
+  }
+}
+

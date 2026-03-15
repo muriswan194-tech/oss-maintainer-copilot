@@ -1,0 +1,14 @@
+{
+  "title": "Clarify local setup steps in README and CONTRIBUTING",
+  "description": "Tightens the contributor docs and fixes a broken setup example for Windows users.",
+  "changed_file_paths": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "docs/setup.md"
+  ],
+  "commit_messages": [
+    "docs: clarify Windows setup",
+    "docs: fix broken contributing link"
+  ]
+}
+

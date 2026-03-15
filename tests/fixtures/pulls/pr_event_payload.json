@@ -1,0 +1,28 @@
+{
+  "action": "opened",
+  "repository": {
+    "full_name": "octo-org/oss-maintainer-copilot",
+    "html_url": "https://github.com/octo-org/oss-maintainer-copilot"
+  },
+  "pull_request": {
+    "number": 42,
+    "title": "Add structured issue triage output models",
+    "body": "Introduces typed Pydantic schemas and a first pass issue triage agent.",
+    "labels": [
+      { "name": "automation" },
+      { "name": "triage" }
+    ],
+    "user": {
+      "login": "maintainer-example"
+    }
+  },
+  "changed_file_paths": [
+    "src/oss_maintainer_copilot/schemas/triage.py",
+    "src/oss_maintainer_copilot/agents/issue_triage.py",
+    "tests/test_issue_triage.py"
+  ],
+  "commit_messages": [
+    "feat: add structured issue triage models",
+    "test: cover issue triage outputs"
+  ]
+}
