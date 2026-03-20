@@ -1,0 +1,182 @@
+{
+  "repository_summary": "oss-maintainer-copilot is a Python repository focused on issue triage, PR review preparation, release drafting. A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, repository intelligence, and contributor onboarding guidance.",
+  "first_session_goal": "Get the project running locally, then trace one maintainer workflow from `.github/workflows/` through the CLI and checked-in outputs.",
+  "setup_checkpoints": [
+    {
+      "command": "python -m venv .venv",
+      "purpose": "Create an isolated development environment.",
+      "success_signal": "You can activate a local environment without errors."
+    },
+    {
+      "command": ". .venv/Scripts/activate",
+      "purpose": "Run the documented project setup command.",
+      "success_signal": "The command completes without blocking errors."
+    },
+    {
+      "command": "python -m pip install --upgrade pip",
+      "purpose": "Install the project and development dependencies.",
+      "success_signal": "The package and development tools install successfully."
+    },
+    {
+      "command": "python -m pip install -e .[dev]",
+      "purpose": "Install the project and development dependencies.",
+      "success_signal": "The package and development tools install successfully."
+    },
+    {
+      "command": "pytest",
+      "purpose": "Verify the current workflow outputs stay stable.",
+      "success_signal": "Tests complete without regressions."
+    },
+    {
+      "command": "ruff check .",
+      "purpose": "Check style and lint expectations before opening a pull request.",
+      "success_signal": "Ruff finishes without reporting blocking issues."
+    }
+  ],
+  "reading_order": [
+    {
+      "title": "Orient On The Repository",
+      "objective": "Read the top-level docs to understand the maintainer workflows and public outputs.",
+      "paths": [
+        "README.md",
+        "CONTRIBUTING.md"
+      ],
+      "completion_signal": "You can explain the repository purpose and name the core maintainer workflows."
+    },
+    {
+      "title": "Confirm Local Setup",
+      "objective": "Use the documented setup files and commands to prepare a working development environment.",
+      "paths": [
+        "pyproject.toml",
+        "README.md",
+        "CONTRIBUTING.md"
+      ],
+      "completion_signal": "You know which file controls dependencies and which commands are part of the local setup path."
+    },
+    {
+      "title": "Inspect The Automation Entry Points",
+      "objective": "Start here to understand how repository events are wired into maintainer workflows.",
+      "paths": [
+        ".github/workflows/"
+      ],
+      "completion_signal": "You know when to visit .github/workflows/ and what it owns in the repository."
+    },
+    {
+      "title": "Read The User-Facing Examples",
+      "objective": "Start here if you want the fastest overview of what the project produces today.",
+      "paths": [
+        "examples/"
+      ],
+      "completion_signal": "You know when to visit examples/ and what it owns in the repository."
+    },
+    {
+      "title": "Learn The Stable Contracts",
+      "objective": "Start here to learn expected behavior before changing schemas or workflow heuristics.",
+      "paths": [
+        "tests/"
+      ],
+      "completion_signal": "You know when to visit tests/ and what it owns in the repository."
+    },
+    {
+      "title": "Trace The Core Implementation",
+      "objective": "Start here if you want to extend issue triage, PR briefs, release drafting, or repo intelligence.",
+      "paths": [
+        "src/"
+      ],
+      "completion_signal": "You know when to visit src/ and what it owns in the repository."
+    },
+    {
+      "title": "Ship A Narrow First Change",
+      "objective": "Choose one narrow maintainer workflow improvement, then trace it from automation to output examples and implementation.",
+      "paths": [
+        ".github/workflows/",
+        "examples/",
+        "src/"
+      ],
+      "completion_signal": "Your first change touches the workflow logic and the public-facing artifacts that document it."
+    }
+  ],
+  "contributor_tracks": [
+    {
+      "name": "Workflow Output Stewardship",
+      "fit_for": "Contributors who want to improve examples, fixtures, or output stability before touching deeper logic.",
+      "first_reads": [
+        "examples/",
+        "tests/"
+      ],
+      "first_tasks": [
+        "Refresh checked-in example outputs when workflows change.",
+        "Add regression fixtures for edge cases maintainers want to keep stable."
+      ]
+    },
+    {
+      "name": "Heuristics And Schemas",
+      "fit_for": "Contributors comfortable making small, typed changes to classification logic and output models.",
+      "first_reads": [
+        "src/",
+        "tests/"
+      ],
+      "first_tasks": [
+        "Refine a narrow heuristic and add a focused regression test.",
+        "Extend a schema additively before changing public output contracts."
+      ]
+    },
+    {
+      "name": "Automation And Maintainer Operations",
+      "fit_for": "Contributors who want to improve GitHub workflows, permission scopes, or maintainer-facing automation behavior.",
+      "first_reads": [
+        ".github/workflows/",
+        "examples/"
+      ],
+      "first_tasks": [
+        "Review workflow triggers and permission scopes for least privilege.",
+        "Tighten comment or artifact handling without widening automation behavior unexpectedly."
+      ]
+    }
+  ],
+  "starter_tasks": [
+    {
+      "title": "Refresh An Example Flow",
+      "reason": "Example outputs are the fastest way for maintainers and evaluators to understand the product.",
+      "suggested_paths": [
+        "examples/",
+        "README.md"
+      ],
+      "difficulty": "beginner"
+    },
+    {
+      "title": "Add A Regression Fixture",
+      "reason": "Maintainers need stable outputs before they trust automation in triage, review, or release workflows.",
+      "suggested_paths": [
+        "tests/",
+        "tests/fixtures/"
+      ],
+      "difficulty": "beginner"
+    },
+    {
+      "title": "Improve One Narrow Heuristic",
+      "reason": "Small deterministic improvements compound well when they ship with fixtures and examples.",
+      "suggested_paths": [
+        "src/",
+        "tests/"
+      ],
+      "difficulty": "intermediate"
+    },
+    {
+      "title": "Tighten One Workflow Surface",
+      "reason": "Maintainer automation becomes more trustworthy when permission scope and artifact handling stay explicit.",
+      "suggested_paths": [
+        ".github/workflows/"
+      ],
+      "difficulty": "intermediate"
+    }
+  ],
+  "escalation_notes": [
+    "Ask a maintainer before renaming public output fields, changing checked-in example expectations, or widening automation behavior.",
+    "Escalate changes that affect release note wording, issue labels, or contributor-facing output stability.",
+    "Treat GitHub workflow permission changes as maintainer-review items, even when the code change seems small.",
+    "Favor additive schema evolution and narrow heuristics before proposing broader refactors.",
+    "Escalate onboarding-doc rewrites when they change the recommended contributor path or maintainer expectations."
+  ],
+  "confidence": 0.98
+}

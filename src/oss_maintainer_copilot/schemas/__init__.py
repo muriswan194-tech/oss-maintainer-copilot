@@ -7,6 +7,13 @@ from oss_maintainer_copilot.schemas.common import (
 )
 from oss_maintainer_copilot.schemas.good_first_issue import GoodFirstIssueResult
 from oss_maintainer_copilot.schemas.github import GitHubIssue, GitHubIssueEnvelope, GitHubRepository
+from oss_maintainer_copilot.schemas.onboarding import (
+    ContributorTrack,
+    OnboardingMapResult,
+    OnboardingStep,
+    SetupCheckpoint,
+    StarterTask,
+)
 from oss_maintainer_copilot.schemas.pull_request import (
     PullRequestSummaryInput,
     PullRequestSummaryResult,
@@ -33,6 +40,7 @@ from oss_maintainer_copilot.schemas.triage import (
 
 __all__ = [
     "ContextLevel",
+    "ContributorTrack",
     "DifficultyLevel",
     "GoodFirstIssueResult",
     "GitHubIssue",
@@ -43,6 +51,8 @@ __all__ = [
     "IssueTriageResult",
     "MarkdownSection",
     "MergedPullRequest",
+    "OnboardingMapResult",
+    "OnboardingStep",
     "PullRequestSummaryInput",
     "PullRequestSummaryResult",
     "RepositoryArea",
@@ -54,6 +64,8 @@ __all__ = [
     "RiskAssessment",
     "RiskLevel",
     "ScopeLevel",
+    "SetupCheckpoint",
+    "StarterTask",
     "StructuredReasoning",
     "VersionRange",
 ]

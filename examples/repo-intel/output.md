@@ -4,12 +4,19 @@
 **Repository:** oss-maintainer-copilot
 
 ### Summary
-oss-maintainer-copilot is a Python repository focused on issue triage, PR review preparation, release drafting. A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, and repository intelligence.
+oss-maintainer-copilot is a Python repository focused on issue triage, PR review preparation, release drafting. A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, repository intelligence, and contributor onboarding guidance.
+
+### Maintainer Summary
+oss-maintainer-copilot looks like an automation-heavy maintainer workspace centered on issue triage, PR review preparation, release drafting. Start with README.md, CONTRIBUTING.md, .github/workflows/ if you need fast maintainer context. The automation layer is an explicit part of how contributors should understand the project.
+
+### Repository Shape
+`automation-heavy maintainer workspace`
 
 ### Maintainer Workflows
 - `issue triage`
 - `PR review preparation`
 - `release drafting`
+- `contributor onboarding`
 - `repository intelligence`
 
 ### Local Setup Path
@@ -27,11 +34,32 @@ oss-maintainer-copilot is a Python repository focused on issue triage, PR review
 - `docs/`: Supporting documentation and demo assets for contributors and evaluators. Entry point: Start here when you need context, visuals, or project-facing documentation.
 - `.github/workflows/`: GitHub Actions entrypoints for issue, PR, release, and CI automation. Entry point: Start here to understand how repository events are wired into maintainer workflows.
 
+### Key Entry Paths
+- `README.md`
+- `CONTRIBUTING.md`
+- `.github/workflows/`
+- `examples/`
+- `tests/`
+- `src/`
+
+### Documentation Surfaces
+- `README.md`
+- `CONTRIBUTING.md`
+- `docs/`
+- `examples/`
+
+### Workflow Surfaces
+- `.github/workflows/`
+- `examples/`
+- `tests/`
+- `src/`
+
 ### Good Starting Points
-- Start with examples/ to see the JSON and markdown outputs expected from each workflow.
-- Read tests/ next to understand which public outputs are treated as stable.
-- Move into src/ once you know which workflow you want to extend or debug.
-- Review .github/workflows/ when you want to understand how repository events trigger automation.
+- Start with README.md to understand the maintainer promise and public workflows.
+- Review .github/workflows/ to see how repository events enter the maintainer workflows.
+- Read examples/ next to see the checked-in JSON and markdown outputs maintainers review.
+- Use tests/ to learn which workflow outputs are treated as stable contracts.
+- Move into src/ after the docs and fixtures make the workflow boundaries clear.
 
 ### Contributor Checklist
 - Read README.md and CONTRIBUTING.md before changing workflow behavior.
@@ -39,4 +67,6 @@ oss-maintainer-copilot is a Python repository focused on issue triage, PR review
 - Follow the documented local setup path before editing code or fixtures.
 - Run pytest after changing schemas, heuristics, or workflow outputs.
 - Run ruff check . before opening a pull request.
+- Refresh docs or onboarding guidance when contributor paths become outdated.
+- Treat workflow permission or trigger changes as maintainer-review items.
 - Update examples, fixtures, and docs when public outputs change.

@@ -1,9 +1,12 @@
 {
-  "repository_summary": "oss-maintainer-copilot is a Python repository focused on issue triage, PR review preparation, release drafting. A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, and repository intelligence.",
+  "repository_summary": "oss-maintainer-copilot is a Python repository focused on issue triage, PR review preparation, release drafting. A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, repository intelligence, and contributor onboarding guidance.",
+  "maintainer_summary": "oss-maintainer-copilot looks like an automation-heavy maintainer workspace centered on issue triage, PR review preparation, release drafting. Start with README.md, CONTRIBUTING.md, .github/workflows/ if you need fast maintainer context. The automation layer is an explicit part of how contributors should understand the project.",
+  "repository_shape": "automation-heavy maintainer workspace",
   "maintainer_workflows": [
     "issue triage",
     "PR review preparation",
     "release drafting",
+    "contributor onboarding",
     "repository intelligence"
   ],
   "local_setup_steps": [
@@ -41,11 +44,32 @@
       "contributor_entrypoint": "Start here to understand how repository events are wired into maintainer workflows."
     }
   ],
+  "key_entry_paths": [
+    "README.md",
+    "CONTRIBUTING.md",
+    ".github/workflows/",
+    "examples/",
+    "tests/",
+    "src/"
+  ],
+  "docs_surfaces": [
+    "README.md",
+    "CONTRIBUTING.md",
+    "docs/",
+    "examples/"
+  ],
+  "workflow_surfaces": [
+    ".github/workflows/",
+    "examples/",
+    "tests/",
+    "src/"
+  ],
   "good_starting_points": [
-    "Start with examples/ to see the JSON and markdown outputs expected from each workflow.",
-    "Read tests/ next to understand which public outputs are treated as stable.",
-    "Move into src/ once you know which workflow you want to extend or debug.",
-    "Review .github/workflows/ when you want to understand how repository events trigger automation."
+    "Start with README.md to understand the maintainer promise and public workflows.",
+    "Review .github/workflows/ to see how repository events enter the maintainer workflows.",
+    "Read examples/ next to see the checked-in JSON and markdown outputs maintainers review.",
+    "Use tests/ to learn which workflow outputs are treated as stable contracts.",
+    "Move into src/ after the docs and fixtures make the workflow boundaries clear."
   ],
   "contributor_checklist": [
     "Read README.md and CONTRIBUTING.md before changing workflow behavior.",
@@ -53,6 +77,8 @@
     "Follow the documented local setup path before editing code or fixtures.",
     "Run pytest after changing schemas, heuristics, or workflow outputs.",
     "Run ruff check . before opening a pull request.",
+    "Refresh docs or onboarding guidance when contributor paths become outdated.",
+    "Treat workflow permission or trigger changes as maintainer-review items.",
     "Update examples, fixtures, and docs when public outputs change."
   ],
   "confidence": 0.95

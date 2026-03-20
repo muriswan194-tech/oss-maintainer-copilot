@@ -1,0 +1,15 @@
+{
+  "repository_name": "tiny-maintainer-tool",
+  "description": "A small Python helper library that automates maintainer checklists and contributor sanity checks.",
+  "primary_language": "Python",
+  "readme_text": "Tiny Maintainer Tool helps maintainers script small contributor checks.\n\n```bash\npython -m venv .venv\npython -m pip install -e .[dev]\npytest\n```\n\nThe current workflows emphasize contributor onboarding and repository maintenance for a small codebase.",
+  "contributing_text": "## Common Commands\npytest\nruff check .\n\nPrefer small schema-safe changes.\n",
+  "setup_files": [
+    "pyproject.toml",
+    "README.md"
+  ],
+  "top_level_paths": [
+    "src/",
+    "tests/"
+  ]
+}

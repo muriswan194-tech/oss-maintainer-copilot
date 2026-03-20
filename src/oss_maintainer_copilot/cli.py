@@ -9,6 +9,10 @@ from oss_maintainer_copilot.agents.issue_triage import (
     build_triage_labels,
     render_triage_markdown,
 )
+from oss_maintainer_copilot.agents.onboarding_map import (
+    OnboardingMapAgent,
+    render_onboarding_map_markdown,
+)
 from oss_maintainer_copilot.agents.pr_summary import PullRequestSummarizer, render_pr_summary_markdown
 from oss_maintainer_copilot.agents.repo_intel import (
     RepositoryIntelligenceAgent,
@@ -46,6 +50,11 @@ def build_parser() -> argparse.ArgumentParser:
     repo_intel_parser.add_argument("--input", required=True, type=Path, help="Path to JSON payload")
     repo_intel_parser.add_argument("--output", type=Path, help="Optional output JSON path")
     repo_intel_parser.add_argument("--markdown", type=Path, help="Optional markdown output path")
+
+    onboarding_parser = subparsers.add_parser("onboarding-map", help="Generate a contributor onboarding map from a normalized repo payload")
+    onboarding_parser.add_argument("--input", required=True, type=Path, help="Path to JSON payload")
+    onboarding_parser.add_argument("--output", type=Path, help="Optional output JSON path")
+    onboarding_parser.add_argument("--markdown", type=Path, help="Optional markdown output path")
 
     return parser
 
@@ -110,6 +119,18 @@ def run_repo_intel(input_path: Path, output_path: Path | None, markdown_path: Pa
     return 0
 
 
+def run_onboarding_map(input_path: Path, output_path: Path | None, markdown_path: Path | None) -> int:
+    repo_input = load_repo_intel_input(input_path)
+    result = OnboardingMapAgent().build(repo_input)
+    _write_outputs(result.model_dump(mode="json"), output_path)
+
+    if markdown_path is not None:
+        markdown = render_onboarding_map_markdown(repo_input, result)
+        markdown_path.write_text(markdown + "\n", encoding="utf-8")
+
+    return 0
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
@@ -122,6 +143,8 @@ def main() -> int:
         return run_generate_release_notes(args.input, args.output, args.markdown)
     if args.command == "repo-intel":
         return run_repo_intel(args.input, args.output, args.markdown)
+    if args.command == "onboarding-map":
+        return run_onboarding_map(args.input, args.output, args.markdown)
 
     parser.error(f"Unsupported command: {args.command}")
     return 2

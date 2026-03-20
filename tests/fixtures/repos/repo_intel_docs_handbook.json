@@ -1,0 +1,20 @@
+{
+  "repository_name": "maintainer-handbook",
+  "description": "Documentation-first playbooks for issue triage, release checklists, and contributor onboarding across OSS projects.",
+  "primary_language": "Markdown",
+  "readme_text": "Maintainer Handbook gives teams repeatable issue triage, release drafting, and contributor onboarding playbooks.\n\n```bash\nnpm install\nnpm run docs:dev\nnpm test\n```\n\nThe current workflows emphasize contributor onboarding, issue triage, and release preparation through docs and examples.",
+  "contributing_text": "## Common Commands\nnpm install\nnpm run docs:dev\nnpm test\n\nUpdate docs, examples, and templates together when contributor guidance changes.\n",
+  "setup_files": [
+    "package.json",
+    "mkdocs.yml",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "top_level_paths": [
+    "docs/",
+    "examples/",
+    "tests/",
+    "templates/",
+    ".github/workflows/"
+  ]
+}

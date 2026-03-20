@@ -27,9 +27,14 @@ class RepositoryIntelligenceResult(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     repository_summary: str
+    maintainer_summary: str
+    repository_shape: str
     maintainer_workflows: list[str] = Field(default_factory=list)
     local_setup_steps: list[str] = Field(default_factory=list)
     major_areas: list[RepositoryArea] = Field(default_factory=list)
+    key_entry_paths: list[str] = Field(default_factory=list)
+    docs_surfaces: list[str] = Field(default_factory=list)
+    workflow_surfaces: list[str] = Field(default_factory=list)
     good_starting_points: list[str] = Field(default_factory=list)
     contributor_checklist: list[str] = Field(default_factory=list)
     confidence: float = Field(ge=0.0, le=1.0)
