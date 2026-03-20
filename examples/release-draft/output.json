@@ -1,0 +1,44 @@
+{
+  "release_title": "v0.3.0 (v0.2.0 -> v0.3.0) - 2026-03-20",
+  "highlights": [
+    "Add contributor guidance generation for issue triage.",
+    "Breaking change: Breaking: rename triage output fields and require migration."
+  ],
+  "grouped_markdown_sections": [
+    {
+      "title": "Features",
+      "entries": [
+        "Add contributor guidance generation for issue triage by @alice on 2026-03-10."
+      ],
+      "markdown": "## Features\n- Add contributor guidance generation for issue triage by @alice on 2026-03-10."
+    },
+    {
+      "title": "Fixes",
+      "entries": [
+        "Fix issue label synchronization in GitHub Action by @bob on 2026-03-11."
+      ],
+      "markdown": "## Fixes\n- Fix issue label synchronization in GitHub Action by @bob on 2026-03-11."
+    },
+    {
+      "title": "Documentation",
+      "entries": [
+        "Documentation: improve Windows setup instructions by @alice on 2026-03-12."
+      ],
+      "markdown": "## Documentation\n- Documentation: improve Windows setup instructions by @alice on 2026-03-12."
+    },
+    {
+      "title": "Refactors",
+      "entries": [
+        "Refactor payload parsing helpers into a shared module by @carol on 2026-03-13."
+      ],
+      "markdown": "## Refactors\n- Refactor payload parsing helpers into a shared module by @carol on 2026-03-13."
+    }
+  ],
+  "breaking_changes_section": "- Breaking: rename triage output fields and require migration by @dave on 2026-03-14. Review migration guidance before upgrading.",
+  "contributor_acknowledgments": [
+    "@alice contributed 2 merged pull requests.",
+    "@bob contributed 1 merged pull request.",
+    "@carol contributed 1 merged pull request.",
+    "@dave contributed 1 merged pull request."
+  ]
+}

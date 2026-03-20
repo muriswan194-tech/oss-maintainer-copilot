@@ -5,6 +5,7 @@ from pathlib import Path
 
 from oss_maintainer_copilot.cli import (
     run_generate_release_notes,
+    run_repo_intel,
     run_summarize_pr,
     run_triage_issue,
 )
@@ -69,3 +70,22 @@ def test_cli_release_notes_writes_json_and_markdown(fixture_root: Path, tmp_path
     assert payload["release_title"].startswith("v0.3.0")
     assert "grouped_markdown_sections" in payload
     assert markdown.startswith("# ")
+
+
+def test_cli_repo_intel_writes_json_and_markdown(fixture_root: Path, tmp_path: Path) -> None:
+    json_path = tmp_path / "repo-intel.json"
+    markdown_path = tmp_path / "repo-intel.md"
+
+    exit_code = run_repo_intel(
+        _fixture(fixture_root, "repos/repo_intel_python_toolkit.json"),
+        json_path,
+        markdown_path,
+    )
+
+    payload = json.loads(json_path.read_text(encoding="utf-8"))
+    markdown = markdown_path.read_text(encoding="utf-8")
+
+    assert exit_code == 0
+    assert "repository_summary" in payload
+    assert "maintainer_workflows" in payload
+    assert "<!-- oss-maintainer-copilot:repo-intel -->" in markdown

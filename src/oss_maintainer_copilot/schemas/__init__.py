@@ -12,6 +12,11 @@ from oss_maintainer_copilot.schemas.pull_request import (
     PullRequestSummaryResult,
     RiskAssessment,
 )
+from oss_maintainer_copilot.schemas.repo_intel import (
+    RepositoryArea,
+    RepositoryIntelligenceInput,
+    RepositoryIntelligenceResult,
+)
 from oss_maintainer_copilot.schemas.release_notes import (
     MarkdownSection,
     MergedPullRequest,
@@ -40,6 +45,9 @@ __all__ = [
     "MergedPullRequest",
     "PullRequestSummaryInput",
     "PullRequestSummaryResult",
+    "RepositoryArea",
+    "RepositoryIntelligenceInput",
+    "RepositoryIntelligenceResult",
     "ReleaseNotesInput",
     "ReleaseNotesResult",
     "RepositoryMetadata",

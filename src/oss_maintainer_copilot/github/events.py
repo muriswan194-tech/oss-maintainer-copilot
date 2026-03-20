@@ -11,6 +11,7 @@ from oss_maintainer_copilot.schemas.github import (
     GitHubPullRequestEnvelope,
 )
 from oss_maintainer_copilot.schemas.pull_request import PullRequestSummaryInput
+from oss_maintainer_copilot.schemas.repo_intel import RepositoryIntelligenceInput
 from oss_maintainer_copilot.schemas.release_notes import ReleaseNotesInput
 
 
@@ -53,3 +54,7 @@ def load_pull_request_summary_input(path: Path) -> PullRequestSummaryInput:
 
 def load_release_notes_input(path: Path) -> ReleaseNotesInput:
     return ReleaseNotesInput.model_validate(_load_json(path))
+
+
+def load_repo_intel_input(path: Path) -> RepositoryIntelligenceInput:
+    return RepositoryIntelligenceInput.model_validate(_load_json(path))

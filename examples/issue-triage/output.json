@@ -1,0 +1,43 @@
+{
+  "category": "docs",
+  "difficulty": "beginner",
+  "good_first_issue": true,
+  "confidence": 0.86,
+  "missing_context": [],
+  "reasoning": [
+    {
+      "category": "category",
+      "decision": "docs",
+      "evidence": [
+        "Category scores: bug=0, docs=5, feature_request=0, refactor=0, ambiguous=0.",
+        "Existing labels: docs."
+      ],
+      "confidence": 0.99
+    },
+    {
+      "category": "difficulty",
+      "decision": "beginner",
+      "evidence": [
+        "Detected 1 cross-cutting area hints.",
+        "Issue body length is about 27 words.",
+        "The issue is narrowly scoped and already well specified."
+      ],
+      "confidence": 0.68
+    },
+    {
+      "category": "good_first_issue",
+      "decision": "true",
+      "evidence": [
+        "Category is docs.",
+        "Difficulty is beginner.",
+        "The issue is explicit, low-risk, and scoped tightly enough for onboarding."
+      ],
+      "confidence": 0.72
+    }
+  ],
+  "recommended_labels": [
+    "triage:category:docs",
+    "difficulty:beginner",
+    "triage:good-first-issue"
+  ]
+}

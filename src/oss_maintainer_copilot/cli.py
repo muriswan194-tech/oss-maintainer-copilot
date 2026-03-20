@@ -10,10 +10,15 @@ from oss_maintainer_copilot.agents.issue_triage import (
     render_triage_markdown,
 )
 from oss_maintainer_copilot.agents.pr_summary import PullRequestSummarizer, render_pr_summary_markdown
+from oss_maintainer_copilot.agents.repo_intel import (
+    RepositoryIntelligenceAgent,
+    render_repo_intel_markdown,
+)
 from oss_maintainer_copilot.agents.release_notes import ReleaseNotesGenerator
 from oss_maintainer_copilot.github.events import (
     load_issue_envelope,
     load_pull_request_summary_input,
+    load_repo_intel_input,
     load_release_notes_input,
 )
 
@@ -36,6 +41,11 @@ def build_parser() -> argparse.ArgumentParser:
     release_parser.add_argument("--input", required=True, type=Path, help="Path to JSON payload")
     release_parser.add_argument("--output", type=Path, help="Optional output JSON path")
     release_parser.add_argument("--markdown", type=Path, help="Optional markdown output path")
+
+    repo_intel_parser = subparsers.add_parser("repo-intel", help="Generate repository intelligence from a normalized repo payload")
+    repo_intel_parser.add_argument("--input", required=True, type=Path, help="Path to JSON payload")
+    repo_intel_parser.add_argument("--output", type=Path, help="Optional output JSON path")
+    repo_intel_parser.add_argument("--markdown", type=Path, help="Optional markdown output path")
 
     return parser
 
@@ -88,6 +98,18 @@ def run_generate_release_notes(input_path: Path, output_path: Path | None, markd
     return 0
 
 
+def run_repo_intel(input_path: Path, output_path: Path | None, markdown_path: Path | None) -> int:
+    repo_input = load_repo_intel_input(input_path)
+    result = RepositoryIntelligenceAgent().analyze(repo_input)
+    _write_outputs(result.model_dump(mode="json"), output_path)
+
+    if markdown_path is not None:
+        markdown = render_repo_intel_markdown(repo_input, result)
+        markdown_path.write_text(markdown + "\n", encoding="utf-8")
+
+    return 0
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
@@ -98,6 +120,8 @@ def main() -> int:
         return run_summarize_pr(args.input, args.output, args.markdown)
     if args.command == "generate-release-notes":
         return run_generate_release_notes(args.input, args.output, args.markdown)
+    if args.command == "repo-intel":
+        return run_repo_intel(args.input, args.output, args.markdown)
 
     parser.error(f"Unsupported command: {args.command}")
     return 2

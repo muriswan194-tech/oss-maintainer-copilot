@@ -1,31 +1,48 @@
 # OSS Maintainer Copilot
 
-OSS Maintainer Copilot is a modular Python toolkit for maintainers who want structured, contributor-friendly GitHub automation without building a full SaaS product. It is designed around typed schemas, deterministic core logic, and GitHub Actions workflows that can be adapted to different repositories.
+OSS Maintainer Copilot is a maintainer operations toolkit for GitHub repositories. It helps maintainers reduce repeated work in issue triage, PR review preparation, release drafting, and contributor onboarding decisions through typed schemas, deterministic logic, and GitHub Actions workflows.
 
-This repository is being built in milestones. The current milestone includes:
+This project is intentionally not "another chatbot for repos." The current focus is structured outputs that can be reviewed, tested, and plugged into repository automation with minimal hidden behavior.
+
+![OSS Maintainer Copilot workflow overview](./docs/assets/maintainer-workflows.svg)
+
+The current milestone includes:
 
 - repository scaffolding for an open-source Python project
-- shared Pydantic schemas for GitHub payloads and triage outputs
+- shared Pydantic schemas for GitHub payloads and automation outputs
 - an issue triage agent with structured reasoning
-- a dedicated good-first-issue classifier for safe contributor onboarding
-- a pull request summarizer with typed outputs for reviewer workflows
-- a release notes generator that produces polished draft-ready markdown
-- contributor guidance generation for triaged issues
-- CLI entrypoints for issue triage, PR summaries, and release notes
+- a dedicated good-first-issue classifier for safer onboarding recommendations
+- a pull request summarizer with reviewer-focused output
+- a release notes generator that produces draft-ready markdown
+- an initial repository intelligence workflow for contributor onboarding and repo understanding
+- baseline OSS trust files for licensing, security reporting, CI, and community health
+- CLI entrypoints for issue triage, PR summaries, release notes, and repository intelligence
 - pytest fixtures and unit tests
-- GitHub Actions workflows for issue triage, PR summaries, and release drafts
+- GitHub Actions workflows for CI, issue triage, PR summaries, and release drafts
 
 ## Problem
 
 Maintainers spend repeated effort on the same operational tasks:
 
-- deciding issue difficulty
-- identifying likely good first issues
-- turning vague tickets into contributor guidance
-- summarizing pull requests
+- classifying and routing incoming issues
+- deciding whether an issue is ready for a first-time contributor
+- preparing reviewers with concise PR context
 - assembling release notes from merged work
+- explaining how repository structure maps to maintainer workflows
 
-Most automation in this space is either repo-specific, opaque, or too tightly coupled. This project aims to keep the architecture small, typed, and easy for contributors to extend.
+Most automation in this space is either repo-specific, opaque, or too tightly coupled. OSS Maintainer Copilot aims to keep the core small, typed, and inspectable so maintainers can adapt it to their own repositories without adopting a full SaaS product.
+
+## Positioning
+
+OSS Maintainer Copilot is best understood as a maintainer operations toolkit:
+
+- issue triage
+- PR review preparation
+- release drafting
+- contributor onboarding signals
+- structured repository intelligence over time
+
+That framing fits the current implementation and leaves room for future modules such as repository intelligence summaries and onboarding maps without changing the repository identity.
 
 ## Architecture
 
@@ -38,14 +55,25 @@ src/oss_maintainer_copilot/
 tests/
   fixtures/    Sample GitHub issue, PR, and release payloads
 .github/workflows/
+  ci.yml
   issue-triage.yml
   pr-summary.yml
   release-notes.yml
 ```
 
-The current implementation favors deterministic heuristics so outputs are stable and testable. Each decision is accompanied by structured reasoning that downstream automation can consume.
+The current implementation favors deterministic heuristics so outputs stay stable and testable. Each automated recommendation includes inspectable reasoning that downstream tooling can consume.
 
-## Issue Triage
+## Why Maintainers Can Trust It
+
+- deterministic heuristics with structured reasoning instead of opaque one-line summaries
+- typed Pydantic schemas for every maintainer-facing workflow
+- machine-readable JSON and markdown outputs for both humans and automation
+- reviewable GitHub Actions with explicit permission scopes
+- fixture-driven tests plus baseline CI on pushes and pull requests
+
+## Current Workflows
+
+### Issue Triage
 
 The issue triage agent accepts an issue title, body, labels, and optional repository metadata. It produces:
 
@@ -55,10 +83,11 @@ The issue triage agent accepts an issue title, body, labels, and optional reposi
 - confidence
 - missing context fields
 - structured reasoning
+- recommended automation labels
 
-The separate good-first-issue agent sits on top of triage output and applies stricter onboarding rules before recommending that a maintainer apply a newcomer-friendly label.
+The separate good-first-issue agent builds on top of the triage result and applies stricter onboarding rules before recommending that a maintainer label the issue for newcomers.
 
-## PR Summaries
+### PR Review Briefs
 
 The PR summarizer accepts a PR title, description, changed file paths, and commit messages. It produces:
 
@@ -70,7 +99,7 @@ The PR summarizer accepts a PR title, description, changed file paths, and commi
 
 It currently includes focused heuristics for docs-only PRs, risky workflow or runtime changes, and explicit breaking changes.
 
-## Release Notes
+### Release Drafts
 
 The release notes generator accepts merged PR metadata across a version range and produces:
 
@@ -82,22 +111,42 @@ The release notes generator accepts merged PR metadata across a version range an
 
 The rendered markdown is designed to be pasted directly into a GitHub release draft with minimal cleanup.
 
-## Issue Triage Output
+### Repository Intelligence
 
-The issue triage agent currently classifies:
+The repository intelligence agent accepts a normalized repository profile and produces:
 
-- difficulty: `beginner`, `intermediate`, `advanced`, or `maintainer_only`
-- scope: `narrow`, `moderate`, or `broad`
-- risk: `low`, `medium`, or `high`
-- context: `low`, `medium`, or `high`
-- good first issue candidate: `true` only when scope is narrow, risk is low, and context is low
-
-It also drafts contributor guidance with:
-
-- likely files or directories to inspect
+- repository summary
+- maintainer workflows
 - local setup steps
-- acceptance criteria
-- follow-up questions when the issue description is underspecified
+- major areas explained
+- contributor starting points
+- contributor checklist
+
+This gives the project a first structured onboarding layer that future maintainer and contributor workflows can build on top of.
+
+## Examples
+
+The repository includes checked-in example inputs and outputs so evaluators can understand the workflows quickly:
+
+- [Issue triage example](./examples/issue-triage/output.md)
+- [PR brief example](./examples/pr-brief/output.md)
+- [Release draft example](./examples/release-draft/output.md)
+- [Repository intelligence example](./examples/repo-intel/output.md)
+- [Examples overview](./examples/README.md)
+
+These examples are backed by fixture data and include both markdown and JSON artifacts.
+
+## Near-Term Direction
+
+The next milestone strengthens OSS Maintainer Copilot as a maintainer workspace rather than just a set of isolated heuristics. The priority areas are:
+
+- a shared repository intelligence layer that understands repository structure and setup files
+- contributor onboarding maps built on top of repository intelligence
+- expansion of the initial repository intelligence workflow into a fuller onboarding map
+- stronger evaluation fixtures and workflow contract tests
+- better PR and release inputs for large repositories and noisier payloads
+
+See [ROADMAP.md](./ROADMAP.md) for the concrete milestone plan.
 
 ## Getting Started
 
@@ -125,6 +174,12 @@ Generate release notes from merged PR metadata:
 
 ```bash
 omc generate-release-notes --input tests/fixtures/releases/release_window_mixed.json
+```
+
+Inspect repository structure and contributor starting points:
+
+```bash
+omc repo-intel --input tests/fixtures/repos/repo_intel_python_toolkit.json
 ```
 
 Write machine-readable and markdown output:
@@ -164,11 +219,17 @@ The included [pr-summary workflow](./.github/workflows/pr-summary.yml) runs on p
 
 The included [release-notes workflow](./.github/workflows/release-notes.yml) is triggered manually with a previous and current version tag. It gathers merged pull requests across that range, generates polished markdown, and creates or updates a draft GitHub release.
 
+## Project Hygiene
+
+- [LICENSE](./LICENSE): MIT license for open-source reuse
+- [SECURITY.md](./SECURITY.md): coordinated disclosure and support expectations
+- [CI workflow](./.github/workflows/ci.yml): runs Ruff and pytest on push and pull request
+- [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md): shared behavior expectations and reporting guidance
+- [Issue templates](./.github/ISSUE_TEMPLATE/bug_report.md): structured intake for bugs, features, and docs or onboarding work
+- [Pull request template](./.github/pull_request_template.md): review-ready change summaries aligned with repository standards
+
 ## Roadmap
 
-The next milestones add:
-
-- richer GitHub API collection and pagination support
-- broader workflow integration tests
+The project roadmap keeps the submitted repository identity intact while expanding the product around maintainer workflows.
 
 See [ROADMAP.md](./ROADMAP.md) for the planned sequence.

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">OSS Maintainer Copilot workflow overview</title>
+  <desc id="desc">A visual summary of issue triage, PR brief, release draft, and repository intelligence outputs.</desc>
+  <rect width="1200" height="760" fill="#f4f1e8"/>
+  <rect x="36" y="32" width="1128" height="84" rx="18" fill="#173d2d"/>
+  <text x="68" y="72" fill="#f7f4ed" font-family="Georgia, serif" font-size="34">OSS Maintainer Copilot</text>
+  <text x="68" y="102" fill="#d7eadf" font-family="Arial, sans-serif" font-size="18">Maintainer operations workflows with structured outputs, typed schemas, and reviewable automation.</text>
+
+  <rect x="36" y="144" width="536" height="248" rx="18" fill="#fffdfa" stroke="#173d2d" stroke-width="2"/>
+  <text x="64" y="184" fill="#173d2d" font-family="Georgia, serif" font-size="26">Issue Triage</text>
+  <text x="64" y="214" fill="#385546" font-family="Arial, sans-serif" font-size="17">Classifies issues and recommends low-risk maintainer actions.</text>
+  <text x="64" y="252" fill="#173d2d" font-family="Courier New, monospace" font-size="16">category: docs</text>
+  <text x="64" y="280" fill="#173d2d" font-family="Courier New, monospace" font-size="16">difficulty: beginner</text>
+  <text x="64" y="308" fill="#173d2d" font-family="Courier New, monospace" font-size="16">good_first_issue: true</text>
+  <text x="64" y="336" fill="#173d2d" font-family="Courier New, monospace" font-size="16">recommended_labels:</text>
+  <text x="84" y="364" fill="#385546" font-family="Courier New, monospace" font-size="15">- triage:category:docs</text>
+  <text x="84" y="388" fill="#385546" font-family="Courier New, monospace" font-size="15">- difficulty:beginner</text>
+
+  <rect x="628" y="144" width="536" height="248" rx="18" fill="#fffdfa" stroke="#173d2d" stroke-width="2"/>
+  <text x="656" y="184" fill="#173d2d" font-family="Georgia, serif" font-size="26">PR Brief</text>
+  <text x="656" y="214" fill="#385546" font-family="Arial, sans-serif" font-size="17">Gives reviewers a short summary, risk flags, and a focused checklist.</text>
+  <text x="656" y="252" fill="#173d2d" font-family="Courier New, monospace" font-size="16">risk_level: high</text>
+  <text x="656" y="280" fill="#173d2d" font-family="Courier New, monospace" font-size="16">flags: [risky-file-paths]</text>
+  <text x="656" y="308" fill="#173d2d" font-family="Courier New, monospace" font-size="16">checklist:</text>
+  <text x="676" y="336" fill="#385546" font-family="Courier New, monospace" font-size="15">- review touched files for unintended scope</text>
+  <text x="676" y="360" fill="#385546" font-family="Courier New, monospace" font-size="15">- confirm tests cover changed runtime behavior</text>
+
+  <rect x="36" y="424" width="536" height="280" rx="18" fill="#fffdfa" stroke="#173d2d" stroke-width="2"/>
+  <text x="64" y="464" fill="#173d2d" font-family="Georgia, serif" font-size="26">Release Draft</text>
+  <text x="64" y="494" fill="#385546" font-family="Arial, sans-serif" font-size="17">Builds release-ready markdown from merged pull request metadata.</text>
+  <text x="64" y="532" fill="#173d2d" font-family="Courier New, monospace" font-size="16">Highlights</text>
+  <text x="84" y="560" fill="#385546" font-family="Courier New, monospace" font-size="15">- Add contributor guidance generation for issue triage.</text>
+  <text x="84" y="584" fill="#385546" font-family="Courier New, monospace" font-size="15">- Breaking change: rename triage output fields.</text>
+  <text x="64" y="622" fill="#173d2d" font-family="Courier New, monospace" font-size="16">Sections: features, fixes, docs, refactors</text>
+  <text x="64" y="650" fill="#173d2d" font-family="Courier New, monospace" font-size="16">Thanks: contributor acknowledgments included</text>
+
+  <rect x="628" y="424" width="536" height="280" rx="18" fill="#fffdfa" stroke="#173d2d" stroke-width="2"/>
+  <text x="656" y="464" fill="#173d2d" font-family="Georgia, serif" font-size="26">Repository Intelligence</text>
+  <text x="656" y="494" fill="#385546" font-family="Arial, sans-serif" font-size="17">Maps repository structure, setup steps, and contributor entry points.</text>
+  <text x="656" y="532" fill="#173d2d" font-family="Courier New, monospace" font-size="16">setup:</text>
+  <text x="676" y="560" fill="#385546" font-family="Courier New, monospace" font-size="15">python -m venv .venv</text>
+  <text x="676" y="584" fill="#385546" font-family="Courier New, monospace" font-size="15">python -m pip install -e .[dev]</text>
+  <text x="676" y="608" fill="#385546" font-family="Courier New, monospace" font-size="15">pytest</text>
+  <text x="656" y="646" fill="#173d2d" font-family="Courier New, monospace" font-size="16">major areas: src/, tests/, examples/, .github/workflows/</text>
+</svg>

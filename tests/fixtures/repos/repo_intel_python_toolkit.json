@@ -1,0 +1,19 @@
+{
+  "repository_name": "oss-maintainer-copilot",
+  "description": "A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, release drafts, and repository intelligence.",
+  "primary_language": "Python",
+  "readme_text": "OSS Maintainer Copilot is a maintainer operations toolkit for GitHub repositories.\n\n```bash\npython -m venv .venv\n. .venv/Scripts/activate\npython -m pip install --upgrade pip\npython -m pip install -e .[dev]\npytest\n```\n\nThe current workflows include issue triage, PR review preparation, release drafting, and repository intelligence.",
+  "contributing_text": "## Common Commands\npython -m venv .venv\npython -m pip install -e .[dev]\npytest\nruff check .\nomc triage-issue --input tests/fixtures/issues/simple_docs_issue.json\nomc repo-intel --input tests/fixtures/repos/repo_intel_python_toolkit.json\n",
+  "setup_files": [
+    "pyproject.toml",
+    "README.md",
+    "CONTRIBUTING.md"
+  ],
+  "top_level_paths": [
+    "src/",
+    "tests/",
+    "examples/",
+    "docs/",
+    ".github/workflows/"
+  ]
+}
