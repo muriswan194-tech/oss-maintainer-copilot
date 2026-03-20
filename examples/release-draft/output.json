@@ -2,7 +2,7 @@
   "release_title": "v0.3.0 (v0.2.0 -> v0.3.0) - 2026-03-20",
   "highlights": [
     "Add contributor guidance generation for issue triage.",
-    "Breaking change: Breaking: rename triage output fields and require migration."
+    "Breaking change: rename triage output fields and require migration."
   ],
   "grouped_markdown_sections": [
     {
@@ -34,7 +34,12 @@
       "markdown": "## Refactors\n- Refactor payload parsing helpers into a shared module by @carol on 2026-03-13."
     }
   ],
-  "breaking_changes_section": "- Breaking: rename triage output fields and require migration by @dave on 2026-03-14. Review migration guidance before upgrading.",
+  "breaking_changes_section": "- rename triage output fields and require migration by @dave on 2026-03-14. Review migration guidance before upgrading.",
+  "data_quality_notes": [
+    "5 merged pull requests did not include body text, so upgrade note detection may be incomplete.",
+    "5 merged pull requests did not include a PR number, which limits linking or duplicate detection.",
+    "1 breaking change entry lacked explicit migration guidance in the available metadata."
+  ],
   "contributor_acknowledgments": [
     "@alice contributed 2 merged pull requests.",
     "@bob contributed 1 merged pull request.",

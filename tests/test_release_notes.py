@@ -31,6 +31,11 @@ def test_generate_release_notes_groups_sections_and_acknowledgments(fixture_root
         "Refactors",
     ]
     assert "rename triage output fields" in result.breaking_changes_section.casefold()
+    assert result.data_quality_notes == [
+        "5 merged pull requests did not include body text, so upgrade note detection may be incomplete.",
+        "5 merged pull requests did not include a PR number, which limits linking or duplicate detection.",
+        "1 breaking change entry lacked explicit migration guidance in the available metadata.",
+    ]
     assert result.contributor_acknowledgments == [
         "@alice contributed 2 merged pull requests.",
         "@bob contributed 1 merged pull request.",
@@ -47,6 +52,10 @@ def test_generate_release_notes_handles_no_breaking_changes(fixture_root: Path) 
 
     assert result.breaking_changes_section == "No breaking changes were identified in this release range."
     assert len(result.grouped_markdown_sections) == 2
+    assert result.data_quality_notes == [
+        "2 merged pull requests did not include body text, so upgrade note detection may be incomplete.",
+        "2 merged pull requests did not include a PR number, which limits linking or duplicate detection.",
+    ]
     assert result.contributor_acknowledgments == [
         "@alice contributed 1 merged pull request.",
         "@erin contributed 1 merged pull request.",
@@ -64,6 +73,27 @@ def test_render_release_markdown_is_polished_for_github_release(fixture_root: Pa
     assert markdown.startswith("# ")
     assert "## Highlights" in markdown
     assert "## Features" in markdown
+    assert "## Data Quality Notes" in markdown
     assert "## Breaking Changes" in markdown
     assert "## Thanks" in markdown
     assert "@alice contributed 2 merged pull requests." in markdown
+
+
+def test_generate_release_notes_surfaces_sparse_metadata_notes(fixture_root: Path) -> None:
+    release_input = ReleaseNotesInput.model_validate(
+        _load_json_fixture(
+            _fixture(fixture_root, "releases/release_window_sparse_metadata.json")
+        )
+    )
+    result = ReleaseNotesGenerator().generate(release_input)
+
+    assert any("Collapsed 1 duplicate pull request entry" in item for item in result.data_quality_notes)
+    assert any("without labels" in item for item in result.data_quality_notes)
+    assert any("did not include body text" in item for item in result.data_quality_notes)
+    assert any("did not include a PR number" in item for item in result.data_quality_notes)
+    assert "Upgrade note: Migration: update consumers" in result.breaking_changes_section
+    assert result.contributor_acknowledgments == [
+        "@frank contributed 1 merged pull request.",
+        "@grace contributed 1 merged pull request.",
+        "@heidi contributed 1 merged pull request.",
+    ]

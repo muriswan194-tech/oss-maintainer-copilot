@@ -13,10 +13,12 @@ The current milestone includes:
 - an issue triage agent with structured reasoning
 - a dedicated good-first-issue classifier for safer onboarding recommendations
 - a pull request summarizer with reviewer-focused output
-- a release notes generator that produces draft-ready markdown
+- a release notes generator that produces draft-ready markdown and data quality notes
 - an initial repository intelligence workflow for contributor onboarding and repo understanding
+- a contributor onboarding map built on top of repository intelligence
+- checked-in reusable skills for core maintainer workflows
 - baseline OSS trust files for licensing, security reporting, CI, and community health
-- CLI entrypoints for issue triage, PR summaries, release notes, and repository intelligence
+- CLI entrypoints for issue triage, PR summaries, release notes, repository intelligence, and onboarding maps
 - pytest fixtures and unit tests
 - GitHub Actions workflows for CI, issue triage, PR summaries, and release drafts
 
@@ -48,12 +50,13 @@ That framing fits the current implementation and leaves room for future modules 
 
 ```text
 src/oss_maintainer_copilot/
-  agents/      Issue triage, good-first-issue, PR summary, and release note agents
+  agents/      Issue triage, onboarding, repo intelligence, PR summary, and release note agents
   github/      GitHub payload readers and API-facing wrappers
   prompts/     Task-specific prompt templates for future LLM-backed flows
   schemas/     Shared Pydantic models for inputs and outputs
 tests/
   fixtures/    Sample GitHub issue, PR, and release payloads
+skills/        Reusable maintainer workflow definitions and validation guidance
 .github/workflows/
   ci.yml
   issue-triage.yml
@@ -94,10 +97,13 @@ The PR summarizer accepts a PR title, description, changed file paths, and commi
 - a short summary for status updates
 - a technical summary oriented toward reviewers
 - a structured risk assessment
+- changed area detection
+- reviewer focus guidance
+- input warnings for noisy or underspecified PRs
 - a reviewer checklist
 - a release note snippet
 
-It currently includes focused heuristics for docs-only PRs, risky workflow or runtime changes, and explicit breaking changes.
+It currently includes focused heuristics for docs-only PRs, risky workflow or runtime changes, explicit breaking changes, and broad multi-area pull requests that need staged review.
 
 ### Release Drafts
 
@@ -107,22 +113,41 @@ The release notes generator accepts merged PR metadata across a version range an
 - release highlights
 - grouped markdown sections for features, fixes, documentation, and refactors
 - a dedicated breaking changes section
+- data quality notes for incomplete or duplicated metadata
 - contributor acknowledgments
 
-The rendered markdown is designed to be pasted directly into a GitHub release draft with minimal cleanup.
+The rendered markdown is designed to be pasted directly into a GitHub release draft with minimal cleanup, while still being honest about sparse metadata.
 
 ### Repository Intelligence
 
 The repository intelligence agent accepts a normalized repository profile and produces:
 
 - repository summary
+- maintainer summary
+- repository shape
 - maintainer workflows
 - local setup steps
 - major areas explained
+- key entry paths
+- documentation surfaces
+- workflow surfaces
 - contributor starting points
 - contributor checklist
 
 This gives the project a first structured onboarding layer that future maintainer and contributor workflows can build on top of.
+
+### Onboarding Maps
+
+The onboarding map workflow builds on repository intelligence and produces:
+
+- first-session goal
+- setup checkpoints
+- repository reading order
+- contributor tracks
+- starter tasks
+- maintainer escalation notes
+
+This turns repo understanding into a contributor path that maintainers can point newcomers toward instead of rewriting the same onboarding guidance repeatedly. The map now adapts to repository shape so docs-heavy and automation-heavy projects can suggest different first moves.
 
 ## Examples
 
@@ -132,21 +157,35 @@ The repository includes checked-in example inputs and outputs so evaluators can 
 - [PR brief example](./examples/pr-brief/output.md)
 - [Release draft example](./examples/release-draft/output.md)
 - [Repository intelligence example](./examples/repo-intel/output.md)
+- [Onboarding map example](./examples/onboarding-map/output.md)
 - [Examples overview](./examples/README.md)
 
 These examples are backed by fixture data and include both markdown and JSON artifacts.
 
+## Reusable Skills
+
+The repository also includes checked-in maintainer workflow skills under [`skills/`](./skills/):
+
+- `triage-issue`
+- `prepare-pr-review`
+- `draft-release-notes`
+- `onboard-contributor`
+
+These definitions document required inputs, workflow steps, output contracts, and validation paths so the workflows can stay reusable across CLI use, GitHub Actions, and future agent surfaces.
+
 ## Near-Term Direction
 
-The next milestone strengthens OSS Maintainer Copilot as a maintainer workspace rather than just a set of isolated heuristics. The priority areas are:
+The current `v0.2` work strengthens OSS Maintainer Copilot as a maintainer workspace rather than just a set of isolated heuristics. The major tracks are:
 
-- a shared repository intelligence layer that understands repository structure and setup files
-- contributor onboarding maps built on top of repository intelligence
-- expansion of the initial repository intelligence workflow into a fuller onboarding map
-- stronger evaluation fixtures and workflow contract tests
-- better PR and release inputs for large repositories and noisier payloads
+- a deeper shared repository intelligence layer that understands repository structure and setup files
+- contributor onboarding maps that adapt to repository shape
+- triage internals split into signal, scoring, and rendering layers for safer extension
+- broader PR review support for changed areas, noisy payloads, and staged review focus
+- stronger release inputs with data quality notes and safer draft-generation behavior before a new tag exists
+- workflow contract tests, example regression coverage, and reusable skill definitions
 
 See [ROADMAP.md](./ROADMAP.md) for the concrete milestone plan.
+For the issue-ready `v0.2` execution breakdown, see [docs/v0.2-maintainer-workspace-plan.md](./docs/v0.2-maintainer-workspace-plan.md).
 
 ## Getting Started
 
@@ -182,6 +221,12 @@ Inspect repository structure and contributor starting points:
 omc repo-intel --input tests/fixtures/repos/repo_intel_python_toolkit.json
 ```
 
+Generate a contributor onboarding map:
+
+```bash
+omc onboarding-map --input tests/fixtures/repos/repo_intel_python_toolkit.json
+```
+
 Write machine-readable and markdown output:
 
 ```bash
@@ -203,6 +248,13 @@ omc generate-release-notes \
   --input tests/fixtures/releases/release_window_mixed.json \
   --output release-notes.json \
   --markdown release-notes.md
+```
+
+```bash
+omc onboarding-map \
+  --input tests/fixtures/repos/repo_intel_python_toolkit.json \
+  --output onboarding-map.json \
+  --markdown onboarding-map.md
 ```
 
 ## GitHub Actions

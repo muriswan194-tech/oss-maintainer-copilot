@@ -10,6 +10,7 @@ class PullRequestSummaryInput(BaseModel):
 
     title: str
     description: str = ""
+    labels: list[str] = Field(default_factory=list)
     changed_file_paths: list[str] = Field(default_factory=list)
     commit_messages: list[str] = Field(default_factory=list)
 
@@ -28,5 +29,8 @@ class PullRequestSummaryResult(BaseModel):
     short_summary: str
     technical_summary: str
     risk_assessment: RiskAssessment
+    changed_areas: list[str] = Field(default_factory=list)
+    review_focus: list[str] = Field(default_factory=list)
+    input_warnings: list[str] = Field(default_factory=list)
     reviewer_checklist: list[str] = Field(default_factory=list)
     release_note_snippet: str

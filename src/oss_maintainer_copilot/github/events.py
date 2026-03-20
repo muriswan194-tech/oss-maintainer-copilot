@@ -46,6 +46,7 @@ def load_pull_request_summary_input(path: Path) -> PullRequestSummaryInput:
         return PullRequestSummaryInput(
             title=pull_request.title,
             description=pull_request.body,
+            labels=[label.name for label in pull_request.labels],
             changed_file_paths=payload.get("changed_file_paths", []),
             commit_messages=payload.get("commit_messages", []),
         )

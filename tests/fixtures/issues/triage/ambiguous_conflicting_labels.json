@@ -1,0 +1,8 @@
+{
+  "title": "Feature docs for a new release workflow",
+  "body": "We should support a new release workflow and add docs for it soon.",
+  "labels": [
+    "docs",
+    "enhancement"
+  ]
+}

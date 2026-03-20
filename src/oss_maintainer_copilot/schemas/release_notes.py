@@ -14,7 +14,9 @@ class MergedPullRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     title: str
+    number: int | None = None
     labels: list[str] = Field(default_factory=list)
+    body: str = ""
     author: str
     merge_date: str
 
@@ -41,4 +43,5 @@ class ReleaseNotesResult(BaseModel):
     highlights: list[str] = Field(default_factory=list)
     grouped_markdown_sections: list[MarkdownSection] = Field(default_factory=list)
     breaking_changes_section: str
+    data_quality_notes: list[str] = Field(default_factory=list)
     contributor_acknowledgments: list[str] = Field(default_factory=list)

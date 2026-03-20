@@ -26,6 +26,7 @@ omc triage-issue --input tests/fixtures/issues/simple_docs_issue.json
 omc summarize-pr --input tests/fixtures/pulls/sample_pr.json
 omc generate-release-notes --input tests/fixtures/releases/release_window_mixed.json
 omc repo-intel --input tests/fixtures/repos/repo_intel_python_toolkit.json
+omc onboarding-map --input tests/fixtures/repos/repo_intel_python_toolkit.json
 ```
 
 ## Pull Request Expectations

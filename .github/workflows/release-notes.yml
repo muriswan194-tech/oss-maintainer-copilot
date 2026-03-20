@@ -44,6 +44,7 @@ jobs:
         env:
           PREVIOUS_VERSION: ${{ inputs.previous_version }}
           CURRENT_VERSION: ${{ inputs.current_version }}
+          TARGET_COMMITISH: ${{ inputs.target_commitish }}
         with:
           script: |
             const fs = require("fs");
@@ -51,12 +52,35 @@ jobs:
             const repo = context.repo.repo;
             const previousVersion = process.env.PREVIOUS_VERSION;
             const currentVersion = process.env.CURRENT_VERSION;
+            const targetCommitish = process.env.TARGET_COMMITISH;
+            let compareTarget = currentVersion;
+
+            try {
+              await github.rest.git.getRef({
+                owner,
+                repo,
+                ref: `tags/${currentVersion}`
+              });
+            } catch (error) {
+              if (error.status === 404) {
+                compareTarget = targetCommitish;
+              } else {
+                throw error;
+              }
+            }
 
             const compare = await github.rest.repos.compareCommitsWithBasehead({
               owner,
               repo,
-              basehead: `${previousVersion}...${currentVersion}`
+              basehead: `${previousVersion}...${compareTarget}`
             });
+
+            if (compare.data.total_commits > compare.data.commits.length) {
+              core.warning(
+                `The compare API returned ${compare.data.commits.length} of ${compare.data.total_commits} commits. ` +
+                "The generated release input may be incomplete for a large release window."
+              );
+            }
 
             const pullRequests = new Map();
             for (const commit of compare.data.commits) {
@@ -71,7 +95,9 @@ jobs:
                   continue;
                 }
                 pullRequests.set(pr.number, {
+                  number: pr.number,
                   title: pr.title,
+                  body: pr.body || "",
                   labels: (pr.labels || []).map((label) => label.name),
                   author: pr.user ? pr.user.login : "unknown",
                   merge_date: pr.merged_at.slice(0, 10)

@@ -1,0 +1,8 @@
+{
+  "title": "Security regression: workflow token leaks on retry",
+  "body": "A recent regression causes the workflow token to appear in retry logs. Steps to reproduce: run the issue triage workflow, force a retry, and inspect the failed job logs. Expected behavior: retry logs should never expose credentials or auth headers. Done when the retry path redacts secrets again and a regression test covers the failure.",
+  "labels": [
+    "bug",
+    "security"
+  ]
+}

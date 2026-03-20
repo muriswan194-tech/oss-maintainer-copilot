@@ -36,6 +36,13 @@ def _load_json_fixture(path: Path) -> dict:
             ["problem_statement", "reproduction_steps", "expected_behavior"],
         ),
         (
+            "issues/triage/bug_security_regression.json",
+            IssueCategory.BUG,
+            DifficultyLevel.MAINTAINER_ONLY,
+            False,
+            [],
+        ),
+        (
             "issues/triage/docs_windows_setup.json",
             IssueCategory.DOCS,
             DifficultyLevel.BEGINNER,
@@ -48,6 +55,13 @@ def _load_json_fixture(path: Path) -> dict:
             DifficultyLevel.BEGINNER,
             True,
             [],
+        ),
+        (
+            "issues/triage/docs_missing_target.json",
+            IssueCategory.DOCS,
+            DifficultyLevel.BEGINNER,
+            False,
+            ["target_docs_location"],
         ),
         (
             "issues/triage/feature_add_label_filter.json",
@@ -86,6 +100,13 @@ def _load_json_fixture(path: Path) -> dict:
         ),
         (
             "issues/triage/ambiguous_open_question.json",
+            IssueCategory.AMBIGUOUS,
+            DifficultyLevel.ADVANCED,
+            False,
+            ["problem_statement", "acceptance_criteria", "target_area", "motivation"],
+        ),
+        (
+            "issues/triage/ambiguous_conflicting_labels.json",
             IssueCategory.AMBIGUOUS,
             DifficultyLevel.ADVANCED,
             False,

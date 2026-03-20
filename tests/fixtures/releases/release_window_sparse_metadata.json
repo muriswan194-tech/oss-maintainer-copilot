@@ -1,0 +1,45 @@
+{
+  "version_range": {
+    "previous": "v0.3.1",
+    "current": "v0.4.0"
+  },
+  "merged_pull_requests": [
+    {
+      "title": "Add onboarding map CLI output",
+      "labels": [],
+      "body": "Adds markdown and JSON rendering for onboarding map output.",
+      "author": "frank",
+      "merge_date": "2026-03-16"
+    },
+    {
+      "number": 72,
+      "title": "Refactor release drafting helpers",
+      "labels": [
+        "refactor"
+      ],
+      "body": "",
+      "author": "grace",
+      "merge_date": "2026-03-17"
+    },
+    {
+      "number": 73,
+      "title": "Breaking: rename repo intelligence fields",
+      "labels": [
+        "breaking"
+      ],
+      "body": "Migration: update consumers to read maintainer_summary instead of repository_summary.",
+      "author": "heidi",
+      "merge_date": "2026-03-18"
+    },
+    {
+      "number": 73,
+      "title": "Breaking: rename repo intelligence fields",
+      "labels": [
+        "breaking"
+      ],
+      "body": "Migration: update consumers to read maintainer_summary instead of repository_summary.",
+      "author": "heidi",
+      "merge_date": "2026-03-18"
+    }
+  ]
+}

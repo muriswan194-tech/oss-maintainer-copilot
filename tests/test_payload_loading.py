@@ -49,6 +49,7 @@ def test_loads_pull_request_summary_input_from_event_payload(fixture_root: Path)
     summary_input = load_pull_request_summary_input(_fixture(fixture_root, "pulls/pr_event_payload.json"))
 
     assert summary_input.title == "Add structured issue triage output models"
+    assert summary_input.labels == ["automation", "triage"]
     assert len(summary_input.changed_file_paths) == 3
     assert len(summary_input.commit_messages) == 2
 

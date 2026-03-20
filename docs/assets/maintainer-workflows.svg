@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
   <title id="title">OSS Maintainer Copilot workflow overview</title>
-  <desc id="desc">A visual summary of issue triage, PR brief, release draft, and repository intelligence outputs.</desc>
+  <desc id="desc">A visual summary of issue triage, PR brief, release draft, and contributor onboarding map outputs.</desc>
   <rect width="1200" height="760" fill="#f4f1e8"/>
   <rect x="36" y="32" width="1128" height="84" rx="18" fill="#173d2d"/>
   <text x="68" y="72" fill="#f7f4ed" font-family="Georgia, serif" font-size="34">OSS Maintainer Copilot</text>
@@ -35,11 +35,11 @@
   <text x="64" y="650" fill="#173d2d" font-family="Courier New, monospace" font-size="16">Thanks: contributor acknowledgments included</text>
 
   <rect x="628" y="424" width="536" height="280" rx="18" fill="#fffdfa" stroke="#173d2d" stroke-width="2"/>
-  <text x="656" y="464" fill="#173d2d" font-family="Georgia, serif" font-size="26">Repository Intelligence</text>
-  <text x="656" y="494" fill="#385546" font-family="Arial, sans-serif" font-size="17">Maps repository structure, setup steps, and contributor entry points.</text>
-  <text x="656" y="532" fill="#173d2d" font-family="Courier New, monospace" font-size="16">setup:</text>
-  <text x="676" y="560" fill="#385546" font-family="Courier New, monospace" font-size="15">python -m venv .venv</text>
-  <text x="676" y="584" fill="#385546" font-family="Courier New, monospace" font-size="15">python -m pip install -e .[dev]</text>
-  <text x="676" y="608" fill="#385546" font-family="Courier New, monospace" font-size="15">pytest</text>
-  <text x="656" y="646" fill="#173d2d" font-family="Courier New, monospace" font-size="16">major areas: src/, tests/, examples/, .github/workflows/</text>
+  <text x="656" y="464" fill="#173d2d" font-family="Georgia, serif" font-size="26">Onboarding Map</text>
+  <text x="656" y="494" fill="#385546" font-family="Arial, sans-serif" font-size="17">Turns repo intelligence into a contributor path maintainers can reuse.</text>
+  <text x="656" y="532" fill="#173d2d" font-family="Courier New, monospace" font-size="16">first session goal:</text>
+  <text x="676" y="560" fill="#385546" font-family="Courier New, monospace" font-size="15">run local setup, then trace one workflow end-to-end</text>
+  <text x="656" y="592" fill="#173d2d" font-family="Courier New, monospace" font-size="16">tracks: outputs, heuristics, automation</text>
+  <text x="656" y="624" fill="#173d2d" font-family="Courier New, monospace" font-size="16">starter tasks: examples, fixtures, narrow heuristics</text>
+  <text x="656" y="656" fill="#173d2d" font-family="Courier New, monospace" font-size="16">escalate: schema breaks, label changes, workflow perms</text>
 </svg>

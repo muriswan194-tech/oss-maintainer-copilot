@@ -1,0 +1,7 @@
+{
+  "title": "Docs: expand contributor onboarding guidance",
+  "body": "The onboarding guidance is still too light for new contributors and should explain the maintainer workflow better.",
+  "labels": [
+    "docs"
+  ]
+}

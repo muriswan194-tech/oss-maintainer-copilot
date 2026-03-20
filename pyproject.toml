@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oss-maintainer-copilot"
-version = "0.1.0"
-description = "A maintainer operations toolkit for GitHub repositories with structured issue triage, PR briefs, and release drafts."
+version = "0.2.0"
+description = "A maintainer operations toolkit for GitHub repositories with structured triage, review, release, and onboarding workflows."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -32,6 +32,7 @@ package-dir = { "" = "src" }
 where = ["src"]
 
 [tool.pytest.ini_options]
+addopts = ["-p", "no:cacheprovider", "--basetemp=.pytest_tmp"]
 testpaths = ["tests"]
 pythonpath = ["src"]
 
